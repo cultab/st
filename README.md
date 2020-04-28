@@ -54,8 +54,6 @@ Patch authors:
 --------------
 Augusto Born de Oliveira - augustoborn@gmail.com (anysize)
 
-Raphaël Proust - <code - bnwr - net> (bold is not bright)
-
 Avi Halachmi (:avih) - https://github.com/avih (boxdraw)
 
 Alexander Rogachev - https://github.com/cog1to (ligatures)
