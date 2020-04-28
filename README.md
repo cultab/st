@@ -1,23 +1,27 @@
 st - simple terminal
 --------------------
+
 st is a simple terminal emulator for X which sucks less.
 
 
 Requirements
 ------------
+
 In order to build st you need the Xlib header files.
 
 
 Patches included
 ----------------
+
 - Boxdraw:
     Better box drawing
 - Ligatures:
     Supports ligatures (if the font supports them)
 - Bold is not bright:
-    Bold text is not automatically colored with the bright equivelant of it's original color
+    Bold text is not automatically colored with the bright equivalent of it's original color
 - Anysize:
     No weird gaps around st
+- Some drop in """headers""" for colorschemes
 
 
 Installation
