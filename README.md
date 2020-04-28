@@ -17,8 +17,6 @@ Patches included
     Better box drawing
 - Ligatures:
     Supports ligatures (if the font supports them)
-- Bold is not bright:
-    Bold text is not automatically colored with the bright equivalent of it's original color
 - Anysize:
     No weird gaps around st
 - Some drop in """headers""" for colorschemes
@@ -51,8 +49,6 @@ Patch authors:
 --------------
 
 Augusto Born de Oliveira - augustoborn@gmail.com (anysize)
-
-Raphaël Proust - <code - bnwr - net> (bold is not bright)
 
 Avi Halachmi (:avih) - https://github.com/avih (boxdraw)
 
