@@ -19,11 +19,11 @@ Patches included
     Supports ligatures (if the font supports them)
 - Anysize:
     No weird gaps around st
-* Undercurl:
+- Undercurl:
     Support for undercurl control character extension
-* Dynamic Cursor Color:
+- Dynamic Cursor Color:
     Cursor color is swapped with the color of character you're currently on (much like alacritty).
-* xresources:
+- xresources:
     not the one from the wiki, it's from xst, it supports live reloading
 
 
@@ -52,8 +52,9 @@ Based on Aurélien APTEL <aurelien dot aptel at gmail dot com> bt source code.
 
 Patch authors:
 --------------
-
 Augusto Born de Oliveira - augustoborn@gmail.com (anysize)
+
+Raphaël Proust - <code - bnwr - net> (bold is not bright)
 
 Avi Halachmi (:avih) - https://github.com/avih (boxdraw)
 
