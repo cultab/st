@@ -1230,9 +1230,6 @@ tsetchar(Rune u, Glyph *attr, int x, int y)
 	term.dirty[y] = 1;
 	term.line[y][x] = *attr;
 	term.line[y][x].u = u;
-
-	if (isboxdraw(u))
-		term.line[y][x].mode |= ATTR_BOXDRAW;
 }
 
 void
@@ -2601,13 +2598,8 @@ draw(void)
 		cx--;
 
 	drawregion(0, 0, term.col, term.row);
-	/* Draw current line to format ligatures properly. */
-	xdrawline(term.line[term.c.y], 0, term.c.y, term.col);
 	xdrawcursor(cx, term.c.y, term.line[term.c.y][cx],
 			term.ocx, term.ocy, term.line[term.ocy][term.ocx]);
-	/* If cursor was on a transformed glyph, we need to redraw the previous line. */
-	if (term.ocy != term.c.y && (term.line[term.ocy][term.ocx].mode & ATTR_LIGA))
-		xdrawline(term.line[term.ocy], 0, term.ocy, term.col);
 	term.ocx = cx;
 	term.ocy = term.c.y;
 	xfinishdraw();
