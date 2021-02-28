@@ -8,7 +8,7 @@
 //static char *font  = "Hack Nerd Font Mono:style=Regular:pixelsize=16:antialias=true:autohint=true";
 //static char *font  = "Monaco Nerd Font Mono:style=Regular:pixelsize=16:antialias=true:autohint=true";
 //static char *font = "Iosevka Custom:style=Regular:pixelsize=16:antialias=true:autohint=true";
-static char *font = "Terminus:style=Regular:pixelsize=15:antialias=true:autohint=true";
+static char *font = "Terminus:style=Regular:size=10:antialias=true:autohint=true";
 //static char *font = "FuraCode Nerd Font Mono:pixelsize=16:antialias=true:autohint=true";
 //static char *font = "Iosevka Nerd Font Mono:style=Regular:pixelsize=16:antialias=true:autohint=true";
 
@@ -25,7 +25,7 @@ static int borderpx = 2;
 static char *shell = "/bin/sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
-char *scroll = NULL;
+char *scroll = NULL;//"scroll";
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -111,9 +111,9 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-static char *colorname[] = {
+static const char *colorname[] = {
 	/* 8 normal colors */
-	"#222222",
+	"#022222",
 	"#ff5370",
 	"#c3e88d",
 	"#ffcb6b",
@@ -144,7 +144,7 @@ static char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 7;
+unsigned int defaultfg = 257;
 unsigned int defaultbg = 256;
 unsigned int defaultcs = 257;
 unsigned int defaultrcs = 258;
