@@ -19,6 +19,8 @@ Patches included
     Supports ligatures (if the font supports them)
 - Anysize:
     No weird gaps around st
+* Undercurl:
+    Support for undercurl control character extension
 - Some drop in """headers""" for colorschemes
 
 
@@ -53,3 +55,5 @@ Augusto Born de Oliveira - augustoborn@gmail.com (anysize)
 Avi Halachmi (:avih) - https://github.com/avih (boxdraw)
 
 Alexander Rogachev - https://github.com/cog1to (ligatures)
+
+HexOctal - github.com/hexoctal hex0octal@gmail.com (undercurl)
