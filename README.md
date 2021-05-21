@@ -21,6 +21,8 @@ Patches included
     No weird gaps around st
 * Undercurl:
     Support for undercurl control character extension
+* Dynamic Cursor Color:
+    Cursor color is swapped with the color of character you're currently on (much like alacritty).
 - Some drop in """headers""" for colorschemes
 
 
@@ -57,3 +59,5 @@ Avi Halachmi (:avih) - https://github.com/avih (boxdraw)
 Alexander Rogachev - https://github.com/cog1to (ligatures)
 
 HexOctal - github.com/hexoctal hex0octal@gmail.com (undercurl)
+
+Kipras Melnikovas - kipras.org kipras@kipras.org & Stein Gunnar Bakkeby - github.com/bakkeby (dynamic cursor color)
