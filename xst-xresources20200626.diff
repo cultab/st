@@ -64,7 +64,6 @@ index 210f184..76f167f 100644
  }
  
  void
->>>>>>> patch-xrdb-reload
 +xrdb_load(void)
 +{
 +	/* XXX */
