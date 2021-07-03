@@ -2298,6 +2298,7 @@ run:
 
 	setlocale(LC_CTYPE, "");
 	XSetLocaleModifiers("");
+
 	if(!(xw.dpy = XOpenDisplay(NULL)))
 		die("Can't open display\n");
 

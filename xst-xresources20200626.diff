@@ -1,8 +1,17 @@
+From 2752a599ee01305a435729bfacf43b1dde7cf0ef Mon Sep 17 00:00:00 2001
+From: Gavin Vales <gvales2831997@gmail.com>
+Date: Fri, 26 Jun 2020 22:11:51 PST
+Subject: [PATCH] fix: Different way to load xresources
+
+---
+ x.c          | 78 +++++++++++++++++++++++++++++++++++++++++++++++++---
+ 2 files changed, 110 insertions(+), 4 deletions(-)
+
 diff --git a/x.c b/x.c
-index e5f1737..d9915a9 100644
+index 210f184..76f167f 100644
 --- a/x.c
 +++ b/x.c
-@@ -14,6 +14,7 @@
+@@ -15,6 +15,7 @@
  #include <X11/keysym.h>
  #include <X11/Xft/Xft.h>
  #include <X11/XKBlib.h>
@@ -10,7 +19,7 @@ index e5f1737..d9915a9 100644
  
  char *argv0;
  #include "arg.h"
-@@ -45,6 +46,40 @@ typedef struct {
+@@ -48,6 +49,40 @@
  	signed char appcursor; /* application cursor */
  } Key;
  
@@ -51,11 +60,11 @@ index e5f1737..d9915a9 100644
  /* X modifiers */
  #define XK_ANY_MOD    UINT_MAX
  #define XK_NO_MOD     0
-@@ -1970,17 +2005,120 @@ run(void)
- 	}
+@@ -2147,16 +2182,119 @@
  }
  
-+void
+ void
+>>>>>>> patch-xrdb-reload
 +xrdb_load(void)
 +{
 +	/* XXX */
@@ -162,7 +171,7 @@ index e5f1737..d9915a9 100644
 +	signal(SIGUSR1, reload);
 +}
 +
- void
++void
  usage(void)
  {
 -	die("usage: %s [-aiv] [-c class] [-f font] [-g geometry]"
@@ -180,10 +189,11 @@ index e5f1737..d9915a9 100644
  }
  
  int
-@@ -2043,8 +2181,13 @@ run:
+@@ -2043,8 +2181,14 @@ run:
  
  	setlocale(LC_CTYPE, "");
  	XSetLocaleModifiers("");
++
 +	if(!(xw.dpy = XOpenDisplay(NULL)))
 +		die("Can't open display\n");
 +
