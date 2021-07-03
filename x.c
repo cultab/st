@@ -2161,9 +2161,9 @@ xrdb_load(void)
 				colorname[i] = ret.addr;
 		}
 
-		XRESOURCE_LOAD_STRING("foreground", colorname[256]);
-		XRESOURCE_LOAD_STRING("background", colorname[257]);
-		XRESOURCE_LOAD_STRING("cursorfg", colorname[258])
+		XRESOURCE_LOAD_STRING("foreground", colorname[257]);
+		XRESOURCE_LOAD_STRING("background", colorname[258]);
+		XRESOURCE_LOAD_STRING("cursorfg", colorname[256])
 		else {
 		  // this looks confusing because we are chaining off of the if
 		  // in the macro. probably we should be wrapping everything blocks

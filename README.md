@@ -23,7 +23,8 @@ Patches included
     Support for undercurl control character extension
 * Dynamic Cursor Color:
     Cursor color is swapped with the color of character you're currently on (much like alacritty).
-- Some drop in """headers""" for colorschemes
+* xresources:
+    not the one from the wiki, it's from xst, it supports live reloading
 
 
 Installation
@@ -61,3 +62,5 @@ Alexander Rogachev - https://github.com/cog1to (ligatures)
 HexOctal - github.com/hexoctal hex0octal@gmail.com (undercurl)
 
 Kipras Melnikovas - kipras.org kipras@kipras.org & Stein Gunnar Bakkeby - github.com/bakkeby (dynamic cursor color)
+
+Gavin Vales - gvales2831997@gmail.com (port of xresource patch from xst)
