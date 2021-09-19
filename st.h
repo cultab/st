@@ -140,3 +140,4 @@ extern const int boxdraw, boxdraw_bold, boxdraw_braille;
 extern float alpha;
 extern unsigned int defaultcs;
 extern const int boxdraw, boxdraw_bold, boxdraw_braille;
+extern float alpha;
