@@ -848,6 +848,19 @@ xloadcols(void)
 }
 
 int
+xgetcolor(int x, unsigned char *r, unsigned char *g, unsigned char *b)
+{
+	if (!BETWEEN(x, 0, dc.collen))
+		return 1;
+
+	*r = dc.col[x].color.red >> 8;
+	*g = dc.col[x].color.green >> 8;
+	*b = dc.col[x].color.blue >> 8;
+
+	return 0;
+}
+
+int
 xsetcolorname(int x, const char *name)
 {
 	Color ncolor;
@@ -2190,8 +2203,8 @@ xrdb_load(void)
 				colorname[i] = ret.addr;
 		}
 
-		XRESOURCE_LOAD_STRING("foreground", colorname[257]);
-		XRESOURCE_LOAD_STRING("background", colorname[258]);
+		XRESOURCE_LOAD_STRING("foreground", colorname[258]);
+		XRESOURCE_LOAD_STRING("background", colorname[259]);
 		XRESOURCE_LOAD_STRING("cursorfg", colorname[256])
 		else {
 		  // this looks confusing because we are chaining off of the if
@@ -2199,7 +2212,7 @@ xrdb_load(void)
 		  // so this isn't possible...
 		  defaultcs = defaultfg;
 		}
-		XRESOURCE_LOAD_STRING("reverse-cursor", colorname[259])
+		XRESOURCE_LOAD_STRING("reverse-cursor", colorname[257])
 		else {
 		  // see above.
 		  defaultrcs = defaultbg;
@@ -2207,33 +2220,16 @@ xrdb_load(void)
 		XRESOURCE_LOAD_STRING("font", font);
 		XRESOURCE_LOAD_STRING("termname", termname);
 		XRESOURCE_LOAD_STRING("shell", shell);
-
-//		XRESOURCE_LOAD_INTEGER("xfps", xfps);
-//		XRESOURCE_LOAD_INTEGER("actionfps", actionfps);
 		XRESOURCE_LOAD_INTEGER("blinktimeout", blinktimeout);
 		XRESOURCE_LOAD_INTEGER("bellvolume", bellvolume);
 //		XRESOURCE_LOAD_INTEGER("bold_font", bold_font);
 		XRESOURCE_LOAD_INTEGER("borderpx", borderpx);
-//		XRESOURCE_LOAD_INTEGER("cursorshape", xw.cursor);
-//		cursorblinkstate = 1; // in case if cursor shape was changed from a blinking one to a non-blinking
-//		XRESOURCE_LOAD_INTEGER("cursorthickness", cursorthickness);
-//		XRESOURCE_LOAD_INTEGER("cursorblinkstyle", cursorblinkstyle);
-//		XRESOURCE_LOAD_INTEGER("cursorblinkontype", cursorblinkontype);
-
-//		XRESOURCE_LOAD_INTEGER("mouseScrollLines", mousescrolllines);
 
 		XRESOURCE_LOAD_FLOAT("cwscale", cwscale);
 		XRESOURCE_LOAD_FLOAT("chscale", chscale);
 
-//		XRESOURCE_LOAD_CHAR("prompt_char", prompt_char);
 
 		XRESOURCE_LOAD_FLOAT("opacity", alpha);
-//		if (!xrdb_overrides_alpha) {
-//			XRESOURCE_LOAD_INTEGER("opacity", alpha);
-//		}
-
-//		XRESOURCE_LOAD_STRING("imstyle", imstyle);
-//		imstyle = strtolower(imstyle);
 	}
 	XFlush(dpy);
 }
