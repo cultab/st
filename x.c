@@ -1602,7 +1602,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
 		if (base.ustyle != 3) {
 			//XftDrawRect(xw.draw, fg, winx, winy + dc.font.ascent + 1, width, 1);
 			XFillRectangle(xw.dpy, XftDrawDrawable(xw.draw), ugc, winx,
-				winy + dc.font.ascent + 1, width, wlw);
+				winy + dc.font.ascent * chscale + 1, width, wlw);
 		} else if (base.ustyle == 3) {
 			int ww = win.cw;//width;
 			int wh = dc.font.descent - wlw/2 - 1;//r.height/7;
@@ -1652,7 +1652,7 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
 	}
 
 	if (base.mode & ATTR_STRUCK) {
-		XftDrawRect(xw.draw, fg, winx, winy + 2 * dc.font.ascent / 3,
+		XftDrawRect(xw.draw, fg, winx, winy + 2 * dc.font.ascent * chscale / 3,
 				width, 1);
 	}
 
