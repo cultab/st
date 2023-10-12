@@ -5,13 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-//static char *font  = "Hack Nerd Font Mono:style=Regular:pixelsize=16:antialias=true:autohint=true";
-//static char *font  = "Monaco Nerd Font Mono:style=Regular:pixelsize=16:antialias=true:autohint=true";
-//static char *font = "Iosevka Custom:style=Regular:pixelsize=16:antialias=true:autohint=true";
-static char *font = "Terminus:style=Regular:size=10:antialias=true:autohint=true";
-//static char *font = "FuraCode Nerd Font Mono:pixelsize=16:antialias=true:autohint=true";
-//static char *font = "Iosevka Nerd Font Mono:style=Regular:pixelsize=16:antialias=true:autohint=true";
-
+static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -26,7 +20,6 @@ static char *shell = "/bin/sh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
-/* char *scroll = "scroll"; */
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -34,7 +27,7 @@ char *vtiden = "\033[?6c";
 
 /* Kerning / character bounding-box multipliers */
 static float cwscale = 1.0;
-static float chscale = 1.0;//1.3;
+static float chscale = 1.0;
 
 /*
  * word delimiter string
@@ -49,6 +42,10 @@ static unsigned int tripleclicktimeout = 600;
 
 /* alt screens */
 int allowaltscreen = 1;
+
+/* frames per second st should at maximum draw to the screen */
+static unsigned int xfps = 120;
+static unsigned int actionfps = 30;
 
 /* allow certain non-interactive (insecure) window operations such as:
    setting the clipboard text */
@@ -72,7 +69,7 @@ static unsigned int blinktimeout = 800;
 /*
  * thickness of underline and bar cursors
  */
-static unsigned int cursorthickness = 1;
+static unsigned int cursorthickness = 2;
 
 /*
  * 1: render most of the lines/blocks characters without using the font for
@@ -81,7 +78,7 @@ static unsigned int cursorthickness = 1;
  * 0: disable (render all U25XX glyphs normally from the font).
  */
 const int boxdraw = 1;
-const int boxdraw_bold = 0;
+const int boxdraw_bold = 1;
 
 /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
 const int boxdraw_braille = 1;
@@ -90,7 +87,7 @@ const int boxdraw_braille = 1;
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
  * it
  */
-static int bellvolume = 50;
+static int bellvolume = 0;
 
 /* default TERM value */
 char *termname = "st-256color";
@@ -112,9 +109,7 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* bg opacity */
-float alpha = 0.8;
-
+/* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
 	"black",
@@ -139,10 +134,12 @@ static const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#292d3d",
-	"#d7d7d7",
 	"#cccccc",
+	"#555555",
+	"gray90", /* default foreground colour */
+	"black", /* default background colour */
 };
+
 
 /*
  * Default colors (colorname index)
@@ -190,49 +187,15 @@ static unsigned int defaultattr = 11;
 static uint forcemousemod = ShiftMask;
 
 /*
- * Xresources preferences to load at startup
- */
-/* ResourcePref resources[] = { */
-/* 		{ "font",         STRING,  &font }, */
-/* 		{ "color0",       STRING,  &colorname[0] }, */
-/* 		{ "color1",       STRING,  &colorname[1] }, */
-/* 		{ "color2",       STRING,  &colorname[2] }, */
-/* 		{ "color3",       STRING,  &colorname[3] }, */
-/* 		{ "color4",       STRING,  &colorname[4] }, */
-/* 		{ "color5",       STRING,  &colorname[5] }, */
-/* 		{ "color6",       STRING,  &colorname[6] }, */
-/* 		{ "color7",       STRING,  &colorname[7] }, */
-/* 		{ "color8",       STRING,  &colorname[8] }, */
-/* 		{ "color9",       STRING,  &colorname[9] }, */
-/* 		{ "color10",      STRING,  &colorname[10] }, */
-/* 		{ "color11",      STRING,  &colorname[11] }, */
-/* 		{ "color12",      STRING,  &colorname[12] }, */
-/* 		{ "color13",      STRING,  &colorname[13] }, */
-/* 		{ "color14",      STRING,  &colorname[14] }, */
-/* 		{ "color15",      STRING,  &colorname[15] }, */
-/* 		{ "cursorColor",  STRING,  &colorname[256] }, */
-/* 		{ "foreground",   STRING,  &colorname[257] }, */
-/* 		{ "background",   STRING,  &colorname[258] }, */
-/* 		{ "termname",     STRING,  &termname }, */
-/* 		{ "shell",        STRING,  &shell }, */
-/* 		{ "xfps",         INTEGER, &xfps }, */
-/* 		{ "actionfps",    INTEGER, &actionfps }, */
-/* 		{ "blinktimeout", INTEGER, &blinktimeout }, */
-/* 		{ "bellvolume",   INTEGER, &bellvolume }, */
-/* 		{ "tabspaces",    INTEGER, &tabspaces }, */
-/* 		{ "borderpx",     INTEGER, &borderpx }, */
-/* 		{ "cwscale",      FLOAT,   &cwscale }, */
-/* 		{ "chscale",      FLOAT,   &chscale }, */
-/* }; */
-
-/*
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
@@ -525,3 +488,4 @@ static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
+>>>>>>> d6306c5 (patched ligatures and boxdraw)
